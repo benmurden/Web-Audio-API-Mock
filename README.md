@@ -1,5 +1,5 @@
 # Web-Audio-API-Mock
-A mock class for testing apps that use Web Audio API. Compatible with headless browsers.
+A mock class for testing apps that use Web Audio API. Compatible with headless browsers like PhantomJS.
 
 Based on https://github.com/jsantell/allen, but passing jsHint and not using CoffeeScript, this is a simple `AudioContext` mock class that attaches to the `window` object, where there wouldn't ordinarily be such an object on headless browsers.
 
