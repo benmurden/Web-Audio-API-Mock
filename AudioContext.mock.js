@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var AnalyserNode, AudioBuffer, AudioBufferSourceNode, AudioContext, AudioDestinationNode, AudioListener, AudioNode, AudioParam, AudioSourceNode, BiquadFilterNode, ChannelMergerNode, ChannelSplitterNode, ConvolverNode, DelayNode, DynamicsCompressorNode, AudioGain, GainNode, JavaScriptNode, MediaElementAudioSourceNode, MediaStreamAudioSourceNode, OscillatorNode, PannerNode, ScriptProcessorNode, WaveShaperNode, WaveTable,
+  var AnalyserNode, AudioBuffer, AudioBufferSourceNode, AudioContext, AudioDestinationNode, AudioListener, AudioNode, AudioParam, AudioSourceNode, BiquadFilterNode, ChannelMergerNode, ChannelSplitterNode, ConvolverNode, DelayNode, DynamicsCompressorNode, AudioGain, GainNode, JavaScriptNode, MediaElementAudioSourceNode, MediaStreamAudioSourceNode, OscillatorNode, PannerNode, ScriptProcessorNode, WaveShaperNode, WaveTable, PeriodicWave,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) { child[key] = parent[key]; } } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
@@ -303,6 +303,12 @@
 
   })();
 
+  PeriodicWave = (function() {
+    function PeriodicWave() {}
+
+    return PeriodicWave;
+  })();
+
   AudioContext = (function() {
     function AudioContext() {
       this.destination = new AudioDestinationNode();
@@ -382,7 +388,11 @@
     };
 
     AudioContext.prototype.createWaveTable = function() {
-      return new WaveTable();
+      throw new Error("createWaveTable is obsolete. Use createPeriodicWave instead.");
+    };
+
+    AudioContext.prototype.createPeriodicWave = function() {
+      return new PeriodicWave();
     };
 
     AudioContext.prototype.createJavaScriptNode = function(bufferSize) {
